@@ -1,0 +1,21 @@
+{
+  "name": "proyecto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootswatch": "^5.1.3",
+    "express": "^4.17.3",
+    "font-awesome": "^4.7.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.15",
+    "serialport": "^10.3.0",
+    "socket.io": "^4.4.1"
+  }
+}

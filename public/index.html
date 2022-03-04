@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Baby Band</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://bootswatch.com/4/minty/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+      integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <!--NAVBAR-->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Baby Band</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">Home </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="./graficas.html">Datos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link btn" href="#modalform" data-bs-toggle="modal"
+                  ><i href="#modal-form" class="fas fa-plus-circle"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!--Bebes-->
+    <div class="container">
+      <div class="row ">
+        <div id="datos-container"></div>
+        
+        
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <button id="btn-send" style="visibility:hidden"></button>
+    <button id="btn-stop" style="visibility:hidden" ></button>
+    <button id="btn-new"  style="visibility:hidden"></button>
+    <!-- Modal formulario -->
+    <div class="modal fade" tabindex="-1" id="modalform">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <legend class="text-center mt-3">
+              Información del bebé <i class="fas fa-baby"></i>
+            </legend>
+          </div>
+          <div class="modal-body">
+            <div class="card">
+              <div class="card-tittle"></div>
+              <div class="card-body">
+                <form id="information-form">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      id="names"
+                      class="form-control"
+                      placeholder="Nombre de la madre o del padre"
+                      autofocus
+                    />
+                  </div>
+                  <div class="form-group d-sm-inline-flex">
+                    <input
+                      type="text"
+                      id="lastname"
+                      class="form-control"
+                      placeholder="Apellido Paterno"
+                    />
+                    <input
+                      type="text"
+                      id="lastname1"
+                      class="form-control"
+                      placeholder="Apellido Materno"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <p>Género del bebé:</p>
+                    <input
+                      type="radio"
+                      name="genero"
+                      id="sexo"
+                      value="Masculino"
+                    />
+                    M
+                    <input
+                      type="radio"
+                      name="genero"
+                      id="sexo1"
+                      value="Femenino"
+                    />
+                    F
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="number"
+                      id="peso"
+                      class="form-control"
+                      placeholder="Peso del bebé:"
+                      step="any"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <p>Fecha de nacimiento:</p>
+                    <input type="date" id="fnacimiento" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <p>Hora de nacimiento:</p>
+                    <input type="time" id="hnacimiento" class="form-control" />
+                  </div>
+                  <div class="form-group">
+                    <p>Cunero asignado:</p>
+                    <select name="Cuneros" id="Cuneros" class="dropdown-toggle">
+                      <option value="Cunero 1">Cunero 1</option>
+                      <option value="Cunero 2">Cunero 2</option>
+                      <option value="Cunero 3">Cunero 3</option>
+                      <option value="Cunero 4">Cunero 4</option>
+                      <option value="Cunero 5">Cunero 5</option>
+                      <option value="Cunero 6">Cunero 6</option>
+                      <option value="Cunero 7">Cunero 7</option>
+                      <option value="Cunero 8">Cunero 8</option>
+                      <option value="Cunero 9">Cunero 9</option>
+                      <option value="Cunero 10">Cunero 10</option>
+                    </select>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="submit"
+                      class="btn btn-primary"
+                      data-bs-dismiss="modal"
+                      id="btn-information-form"
+                    >
+                      Guardar
+                    </button>
+                    <button
+                      type="reset"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal" 
+                    >
+                      Close
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="socket.io/socket.io.js" charset="utf-8"></script>
+    <script type="module" src="main.js" charset="utf-8"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/js/all.min.js"
+      integrity="sha512-cyAbuGborsD25bhT/uz++wPqrh5cqPh1ULJz4NSpN9ktWcA6Hnh9g+CWKeNx2R0fgQt+ybRXdabSBgYXkQTTmA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <footer>
+      <img src="./footer.png" alt="" style="width: 100%; bottom:0%; height: 140px; position:absolute;">
+    </footer>
+  </body>
+</html>
