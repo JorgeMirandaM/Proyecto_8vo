@@ -1,24 +1,36 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-app.js";
-import { getAnalytics, logEvent  } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-analytics.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
-import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.3.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+import { getAnalytics, logEvent  } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
 
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDEBHl4v1OwLhc79cdMxUaLNkUIap4H9hQ",
-  authDomain: "baby-band-cfe90.firebaseapp.com",
-  projectId: "baby-band-cfe90",
-  storageBucket: "baby-band-cfe90.appspot.com",
-  messagingSenderId: "86577313025",
-  appId: "1:86577313025:web:cfd15e09e6e595a1e4d700",
-  measurementId: "G-0XZ91NHHQ2"
+  apiKey: "AIzaSyAHoRmnthzRBXzeUyKQVSGkN_gqZp-e5lE",
+  authDomain: "baby-band-innovatec.firebaseapp.com",
+  projectId: "baby-band-innovatec",
+  storageBucket: "baby-band-innovatec.appspot.com",
+  messagingSenderId: "538055189356",
+  appId: "1:538055189356:web:d4ac7300da51be2e720949",
+  measurementId: "G-2EL0302EBE"
 };
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
+
+
+
+
+
+
+
+
+
+
+
+
 
 const socket = io();
 
@@ -108,6 +120,8 @@ if(activo){
  
  })();
 
+//Meotodo para eliminar
+
  function deleteDocument (){
   const btns = document.querySelectorAll('.btn-danger');
   btns.forEach(btn => {
@@ -156,6 +170,7 @@ informationForm.addEventListener('submit', e =>{
 }
 
 //Obtener los datos de la base de datos
+
 window.addEventListener('DOMContentLoaded', e =>{
   //console.log(e);
 });

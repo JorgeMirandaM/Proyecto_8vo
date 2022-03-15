@@ -9,7 +9,7 @@ const io = new Server(server);
 //Socket IO
 
 io.on('connection', (socket) => {
-  console.log('a user connected');
+  console.log('User connected');
 });
 
 //Servidor
@@ -21,8 +21,8 @@ server.listen(app.get('port'), () => {
   console.log('listening on :',app.get('port') );
 });
 //Arduino
-const Serialport= require('serialport');
-const Readline=Serialport.parsers.Readline;
+const Serialport = require('serialport');
+const Readline = Serialport.parsers.Readline;
 
 
 const port = new Serialport('COM4',{
