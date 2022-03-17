@@ -21,6 +21,91 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 //Datos Personales
+const socket = io();
+
+var a = document.getElementById('temperature');
+var lat = document.getElementById('Latitud');
+var long = document.getElementById('Longitud');
+
+logEvent(analytics, 'Temperatura', { name: 'Temp'});
+
+let activo=true;
+
+if(activo){
+
+  (() => {
+  let info = document.getElementById('btn-send') ;    
+ info.addEventListener('click',() => {
+
+ lat.value="20.75439014079889";
+ long.value="-103.38768083133338";
+
+  
+ socket.on('temp', function (data) {
+   console.log(data);
+   if(activo){
+   
+   if(data<50){
+     temperature.innerHTML = `${data}°C`;
+     temperature.value = data;
+    
+     
+    } 
+    if(data>50){
+     Pulse.innerHTML = `${data}`;
+     Pulse.value=data;
+   }  
+ }
+ 
+  // if(Pulse.value != "" && temperature.value !=""&& activo==true ||Pulse.value != 0 && temperature.value !=0 && activo==true ){
+   try {
+     const docRef = addDoc(collection(db, "Datos"), {
+       temperatura: temperature.value,
+       //pulse: Pulse.value,
+      longitud: "-103.38768083133338",
+      latitud:  "20.75439014079889"
+     });
+     console.log("Document written with ID: ", docRef.id);
+   } catch (e) {
+     console.error("Error adding document: ", e);
+   }
+ //}
+ 
+ });
+   
+ },true);
+ 
+ })();
+ }
+ 
+ (() => {
+ 
+   let stop = document.getElementById('btn-stop') ;    
+   stop.addEventListener('click',() => {
+ 
+   activo=false;
+   temperature.value=0;
+   Pulse.value=0;
+   
+ 
+ },false);
+ 
+ })();
+ 
+ (() => {
+ 
+   let newpulsera = document.getElementById('btn-new') ;    
+   newpulsera.addEventListener('click',() => {
+ 
+   activo=true;
+   temperature.value="";
+   Pulse.value="";
+ 
+ 
+ },false);
+ 
+ })();
+
 
 //Metodo para eliminar
 
@@ -36,7 +121,7 @@ function deleteDocument (){
   
    //Almacenar los datos en la base de datos
   const informationForm = document.getElementById('information-form');
-  
+ /* 
   informationForm.addEventListener('submit', e =>{
     e.preventDefault();
     var time = "";
@@ -132,91 +217,7 @@ function deleteDocument (){
   
 //Datos Médicos
   
-const socket = io();
-
-var a = document.getElementById('temperature');
-var lat = document.getElementById('Latitud');
-var long = document.getElementById('Longitud');
-
-logEvent(analytics, 'Temperatura', { name: 'Temp'});
-
-let activo=true;
-
-if(activo){
-
-  (() => {
-  let info = document.getElementById('btn-send') ;    
- info.addEventListener('click',() => {
-
- lat.value="20.75439014079889";
- long.value="-103.38768083133338";
-
-  
- socket.on('temp', function (data) {
-   console.log(data);
-   if(activo){
-   
-   if(data<50){
-     temperature.innerHTML = `${data}°C`;
-     temperature.value = data;
-    
-     
-    } 
-    if(data>50){
-     Pulse.innerHTML = `${data}`;
-     Pulse.value=data;
-   }  
- }
- 
-   if(Pulse.value != "" && temperature.value !=""&& activo==true ||Pulse.value != 0 && temperature.value !=0 && activo==true ){
-   try {
-     const docRef = addDoc(collection(db, "Datos"), {
-       temperatura: temperature.value,
-       pulse: Pulse.value,
-      longitud: "-103.38768083133338",
-      latitud:  "20.75439014079889"
-     });
-     console.log("Document written with ID: ", docRef.id);
-   } catch (e) {
-     console.error("Error adding document: ", e);
-   }
- }
- 
- });
-   
- },true);
- 
- })();
- }
- 
- (() => {
- 
-   let stop = document.getElementById('btn-stop') ;    
-   stop.addEventListener('click',() => {
- 
-   activo=false;
-   temperature.value=0;
-   Pulse.value=0;
-   
- 
- },false);
- 
- })();
- 
- (() => {
- 
-   let newpulsera = document.getElementById('btn-new') ;    
-   newpulsera.addEventListener('click',() => {
- 
-   activo=true;
-   temperature.value="";
-   Pulse.value="";
- 
- 
- },false);
- 
- })();
 
 
 
-
+*/
