@@ -34,11 +34,11 @@ let activo=true;
 if(activo){
 
   (() => {
-  let info = document.getElementById('btn-send') ;    
+  let info = document.getElementById('btn-send') ; 
+     
  info.addEventListener('click',() => {
 
- lat.value="20.75439014079889";
- long.value="-103.38768083133338";
+ 
 
   
  socket.on('temp', function (data) {
@@ -57,19 +57,19 @@ if(activo){
    }  
  }
  
-  // if(Pulse.value != "" && temperature.value !=""&& activo==true ||Pulse.value != 0 && temperature.value !=0 && activo==true ){
+  if(Pulse.value != "" && temperature.value !=""&& activo==true ||Pulse.value != 0 && temperature.value !=0 && activo==true ){
    try {
      const docRef = addDoc(collection(db, "Datos"), {
        temperatura: temperature.value,
        //pulse: Pulse.value,
-      longitud: "-103.38768083133338",
-      latitud:  "20.75439014079889"
+      longitud: "",
+      latitud:  ""
      });
      console.log("Document written with ID: ", docRef.id);
    } catch (e) {
      console.error("Error adding document: ", e);
    }
- //}
+ }
  
  });
    
@@ -121,7 +121,7 @@ function deleteDocument (){
   
    //Almacenar los datos en la base de datos
   const informationForm = document.getElementById('information-form');
- /* 
+ 
   informationForm.addEventListener('submit', e =>{
     e.preventDefault();
     var time = "";
@@ -220,4 +220,4 @@ function deleteDocument (){
 
 
 
-*/
+

@@ -128,7 +128,7 @@
     <!--Boton de Mapa-->
     <div class="container">
       <div class="row mt-4">
-        <div class="col-md-10"></div>
+        <div class="col-md-10">
          <div class="col-md-4">
             <button id="btn-send" type="button" class="btn btn-info">
               Cargar Datos
@@ -142,12 +142,13 @@
         </div>
       </div>
     </div>
+    <div>
 
     <!-- Mapa Google -->
     <div class="container">
       <div class="row mt-5">
         <div class="col-md-12">
-          <div class="" id="mapa" style="width: 100%; height: 500px"></div>
+          <div id="mapa" style="width: 100%; height: 500px"></div>
         </div>
       </div>
     </div>
@@ -155,11 +156,11 @@
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key=&callback=iniciarMapa"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRmsEDhhja6vIls3iUvqf3MEgneCJua80&callback=iniciarMapa"
     ></script>
 
     <script >
-      $("#cargarcoordenadas").click(function () {
+      $("#btn-send").click(function () {
         var latitud = $("#Latitud").val();
         var longitud = $("#Longitud").val();
 
@@ -172,7 +173,7 @@
       });
 
       function iniciarMapa() {
-        var latitud = 20.75439014079889;
+        var latitud = 100.75439014079889;
         var longitud = -103.38768083133338;
 
         coordenadas = {
