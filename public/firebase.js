@@ -203,7 +203,7 @@ function deleteDocument (){
         <legend class="text-dark " style="font-size: medium"><b>Peso:</b> ${doc.data().Peso} Kg</legend>
       </div>
       <div class="modal-footer">
-          <a href="./datos.html" type="button" class="btn btn-secondary" aria-pressed="true">Datos</a>
+          <a href="./public/datos.html" type="button" class="btn btn-secondary" aria-pressed="true">Datos</a>
   
       </div>
     </div>
