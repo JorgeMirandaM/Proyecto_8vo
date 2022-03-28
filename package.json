@@ -1,7 +1,6 @@
 {
   "name": "proyecto",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,13 +11,25 @@
   "license": "ISC",
   "dependencies": {
     "bootswatch": "^5.1.3",
+    "cors": "^2.8.5",
     "express": "^4.17.3",
-    "firebase": "^9.6.8",
+    "firebase": "^9.6.10",
+    "firebase-admin": "^10.0.2",
+    "firebase-functions": "^3.19.0",
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.0",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.15",
     "serialport": "^9.2.4",
     "socket.io": "^4.4.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgeMirandaM/Proyecto_8vo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JorgeMirandaM/Proyecto_8vo/issues"
+  },
+  "homepage": "https://github.com/JorgeMirandaM/Proyecto_8vo#readme",
+  "description": ""
 }

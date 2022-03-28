@@ -1,4 +1,3 @@
-
 //Arduino
 const Serialport = require('serialport');
 const Readline = Serialport.parsers.Readline;
@@ -24,3 +23,4 @@ parser.on('data', function (data) {
 port.on('error',function(err){
     console.log(err);
 });
+
