@@ -1,10 +1,16 @@
 
-import { collection, addDoc, getDocs,deleteDoc, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 
 import {db} from './firebase.js';
 
 const datosContainer = document.getElementById('datos-container');
 let bebes = [];
+
+window.onload = function() {
+  var carga = document.getElementById('contenedor_carga');
+  carga.style.visibility = 'hidden';
+  carga.style.opacity = '0';
+}
 
 function babyCards(doc,cont){
   datosContainer.innerHTML+=`
