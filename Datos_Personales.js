@@ -139,7 +139,9 @@ function deleteDocument (){
 //Resetear formulario
 function limpiarFormulario() {
   document.getElementById("information-form").reset();
-} 
+}
+
+
 
 
 
