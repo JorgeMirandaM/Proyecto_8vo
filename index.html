@@ -25,7 +25,25 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
       function showContent(){
-        console.log('it works');
+        element = document.getElementById("condicion_especial");
+        check = document.getElementById("flexSwitchCheckDefault");
+        if (check.checked) {
+            element.style.display='block';
+        }
+        else {
+            element.style.display='none';
+        }
+      }
+
+      function showContent2(){
+        element = document.getElementById("gestacion");
+        check = document.getElementById("prematuro");
+        if (check.checked) {
+            element.style.display='block';
+        }
+        else {
+            element.style.display='none';
+        }
       }
     </script>
   </head>
@@ -83,8 +101,12 @@
     <button id="btn-send" style="visibility:hidden"></button>
     <button id="btn-stop" style="visibility:hidden" ></button>
     <button id="btn-new"  style="visibility:hidden"></button>
+    <footer>
+      <img src="./images/footer.png" alt="" style="bottom: 0cm; width: 100%;
+      height: 130px; position: absolute;">
+    </footer> 
     <!-- Modal formulario -->
-    <div class="modal fade" tabindex="-1" id="modalform">
+    <div class="modal fade" tabindex="-1" id="modalform" >
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -114,53 +136,75 @@
                       class="form-control"
                       placeholder="Apellido Paterno"
                       autocomplete="off"
+                      required
                     />
                     <input
                       type="text"
                       id="lastname1"
-                      class="form-control"
+                      class="form-control ml-3"
                       placeholder="Apellido Materno"
                       autocomplete="off"
+                      required
                     />
                   </div>
-                  <div class="form-group">
-                    <p>Género del bebé:</p>
-                    <input
-                      type="radio"
-                      name="genero"
-                      id="sexo"
-                      value="Masculino"
-                    />
-                    M
-                    <input
-                      type="radio"
-                      name="genero"
-                      id="sexo1"
-                      value="Femenino"
-                    />
-                    F
+                  <div class="d-inline-flex">
+                    <div class="form-group mr-5">
+                      <p>Género del bebé:</p>
+                      <input
+                        type="radio"
+                        name="genero"
+                        id="sexo"
+                        value="Masculino"
+                      />
+                      M
+                      <input
+                        type="radio"
+                        name="genero"
+                        id="sexo1"
+                        value="Femenino"
+                      />
+                      F
+                    </div>
+                    <div class="form-group mt-3 ml-lg-5" style="position: relative;">
+                      <input
+                        type="number"
+                        id="peso"
+                        class="form-control"
+                        placeholder="Peso del bebé (kg):"
+                        step="any"
+                        autocomplete="off"
+                      />
+                    </div>
                   </div>
-                  <div class="form-group">
+                  <div class="d-inline-flex">
+                    <div class="form-group">
+                      <p class="mr-4">Fecha de nacimiento:</p>
+                      <input type="date" id="fnacimiento" class="form-control mr-4" placeholder="Fecha de nacimiento" required/>
+                    </div>
+                    <div class="form-group">
+                      <p class="ml-lg-5">Hora de nacimiento:</p>
+                      <input type="time" id="hnacimiento" class="form-control ml-lg-5" placeholder="Hora de nacimiento" required/>
+                    </div>
+                  </div>
+                  <div class="form-group" id="gestacion">
                     <input
                       type="number"
-                      id="peso"
+                      id="semanas"
                       class="form-control"
-                      placeholder="Peso del bebé:"
-                      step="any"
+                      placeholder="Semanas de gestación"
                       autocomplete="off"
+                      min="20" 
+                      pattern="^[0-9]+"
+                      required
                     />
                   </div>
                   <div class="form-group">
-                    <p>Fecha de nacimiento:</p>
-                    <input type="date" id="fnacimiento" class="form-control" />
-                  </div>
-                  <div class="form-group">
-                    <p>Hora de nacimiento:</p>
-                    <input type="time" id="hnacimiento" class="form-control" />
+                    <label for="customRange3" class="form-label">Evaluación de Apgar:</label> <output>0</output>
+                    <input type="range" class="form-range" id="customRange3" min="0" max="10" step="1" oninput="this.previousElementSibling.value = this.value" value="0" required>
                   </div>
                   <div class="form-group">
                     <p>Cunero asignado:</p>
-                    <select name="Cuneros" id="Cuneros" class="dropdown-toggle">
+                    <select name="Cuneros" id="Cuneros" class="dropdown-toggle form-control" style="border-radius: 7px;">
                       <option value="Cunero 1">Cunero 1</option>
                       <option value="Cunero 2">Cunero 2</option>
                       <option value="Cunero 3">Cunero 3</option>
@@ -172,13 +216,17 @@
                       <option value="Cunero 9">Cunero 9</option>
                       <option value="Cunero 10">Cunero 10</option>
                     </select>
-                    <div class="form-group">
-                      <div class="form-check form-switch mt-3 ml-4 mr-auto">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="javascript:showContent()">
-                        <label class="form-check-label" for="flexSwitchCheckDefault">¿El bebé presenta alguna condición médica?</label>
-                      </div>
-                    </div>
                   </div>
+                  <div class="form-group">
+                    <div class="form-check form-switch mt-3 ml-4 mb-3 mr-auto">
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="javascript:showContent()" required>
+                      <label class="form-check-label" for="flexSwitchCheckDefault">¿El bebé presenta alguna condición médica?</label>
+                    </div>
+                    <div class="form-group form-check form-switch mt-3 ml-4 mr-auto" id="condicion_especial" style="display: none;">
+                      <input class="form-check-input" type="checkbox" id="prematuro" onchange="javascript:showContent2()" required>
+                      <label class="form-check-label" for="prematuro">¿El bebé es prematuro o postérmino?</label>
+                    </div>
+                  <div>
                   <div class="modal-footer">
                     <button
                       type="submit"
@@ -214,9 +262,5 @@
       referrerpolicy="no-referrer"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    <header>
-      <img src="./images/footer.png" alt="" style="bottom: 0cm; width: 100%;
-      height: 150px; position: absolute;">
-    </header>
   </body>
 </html>
