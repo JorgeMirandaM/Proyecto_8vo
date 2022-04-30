@@ -35,8 +35,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js"></script>
     <script src="socket.io/socket.io.js" charset="utf-8"></script>
-    <script type="module" src="./firebase.js" charset="utf-8"></script>
-    <script type="module" src="./Datos_Médicos.js" charset="utf-8"></script>
+    
     
   </head>
   <body>
@@ -141,6 +140,9 @@
             <button id="btn-new" type="button" class="btn btn-warning">
               Reanudar
             </button>
+            <button id="btn-new" type="button" class="btn btn-warning" onclick="mostrar()">
+              Prueba
+            </button>
         </div>
       </div>
     </div>
@@ -203,6 +205,19 @@
           document.getElementById("Longitud").value = this.getPosition().lng();
         });
       }
+
+      function mostrar() {
+  swal({
+    title: "Alerta",
+    text: "Pulso fuera de rango",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true,
+  })
+}
     </script>
+    <script type="text/javascript" src="Datos_Médicos.js" ></script>
+    <script type="module" src="./firebase.js" charset="utf-8"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   </body>
 </html>
