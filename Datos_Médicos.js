@@ -1,5 +1,8 @@
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
-import { logEvent } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+//import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+//import { logEvent } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
+
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js";
+import { logEvent } from  "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
 
 import { db } from './firebase.js';
 import { analytics } from './firebase.js';
@@ -16,14 +19,14 @@ logEvent(analytics, 'Temperatura', { name: 'Temp' });
 let activo = true;
 
 if (activo) {
+  let pul = Math.floor((Math.random() * (75 - 65 + 1)) + 65);
+    console.log(pul);
+    Pulse.value=pul;
 
   (() => {
     let info = document.getElementById('btn-send');
 
     info.addEventListener('click', () => {
-
-
-
 
       socket.on('temp', function (data) {
         console.log(data);

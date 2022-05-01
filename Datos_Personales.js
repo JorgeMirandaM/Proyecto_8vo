@@ -1,5 +1,6 @@
 
-import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+//import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+import { collection, addDoc, getDocs,deleteDoc, doc } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js";
 
 import {db} from './firebase.js';
 
@@ -79,6 +80,7 @@ function babyCards(doc,cont){
   const informationForm = document.getElementById('information-form');
   informationForm.addEventListener('submit', async e =>{
     e.preventDefault();
+    console.log("aqui toyu");
     var time = "";
     var selected = "";
     time = hnacimiento.value;

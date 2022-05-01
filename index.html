@@ -136,7 +136,7 @@
                       class="form-control"
                       placeholder="Apellido Paterno"
                       autocomplete="off"
-                      required
+           
                     />
                     <input
                       type="text"
@@ -144,7 +144,7 @@
                       class="form-control ml-3"
                       placeholder="Apellido Materno"
                       autocomplete="off"
-                      required
+                   
                     />
                   </div>
                   <div class="d-inline-flex">
@@ -179,11 +179,11 @@
                   <div class="d-inline-flex">
                     <div class="form-group">
                       <p class="mr-4">Fecha de nacimiento:</p>
-                      <input type="date" id="fnacimiento" class="form-control mr-4" placeholder="Fecha de nacimiento" required/>
+                      <input type="date" id="fnacimiento" class="form-control mr-4" placeholder="Fecha de nacimiento" />
                     </div>
                     <div class="form-group">
                       <p class="ml-lg-5">Hora de nacimiento:</p>
-                      <input type="time" id="hnacimiento" class="form-control ml-lg-5" placeholder="Hora de nacimiento" required/>
+                      <input type="time" id="hnacimiento" class="form-control ml-lg-5" placeholder="Hora de nacimiento" />
                     </div>
                   </div>
                   <div class="form-group" id="gestacion">
@@ -195,12 +195,12 @@
                       autocomplete="off"
                       min="20" 
                       pattern="^[0-9]+"
-                      required
+                
                     />
                   </div>
                   <div class="form-group">
                     <label for="customRange3" class="form-label">Evaluación de Apgar:</label> <output>0</output>
-                    <input type="range" class="form-range" id="customRange3" min="0" max="10" step="1" oninput="this.previousElementSibling.value = this.value" value="0" required>
+                    <input type="range" class="form-range" id="customRange3" min="0" max="10" step="1" oninput="this.previousElementSibling.value = this.value" value="0" >
                   </div>
                   <div class="form-group">
                     <p>Cunero asignado:</p>
@@ -219,11 +219,11 @@
                   </div>
                   <div class="form-group">
                     <div class="form-check form-switch mt-3 ml-4 mb-3 mr-auto">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="javascript:showContent()" required>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="javascript:showContent()">
                       <label class="form-check-label" for="flexSwitchCheckDefault">¿El bebé presenta alguna condición médica?</label>
                     </div>
                     <div class="form-group form-check form-switch mt-3 ml-4 mr-auto" id="condicion_especial" style="display: none;">
-                      <input class="form-check-input" type="checkbox" id="prematuro" onchange="javascript:showContent2()" required>
+                      <input class="form-check-input" type="checkbox" id="prematuro" onchange="javascript:showContent2()">
                       <label class="form-check-label" for="prematuro">¿El bebé es prematuro o postérmino?</label>
                     </div>
                   <div>

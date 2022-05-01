@@ -9,11 +9,7 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
-
-
-
 app.use(express.static(__dirname + ''));
-
 //Socket IO
 
 io.on('connection', (socket) => {
@@ -21,7 +17,6 @@ io.on('connection', (socket) => {
 });
 
 //Servidor
-
 
 server.listen(3000, () => {
   console.log('listening on :',3000 );
