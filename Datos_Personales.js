@@ -5,6 +5,11 @@ import { db } from './firebase.js';
 
 const datosContainer = document.getElementById('datos-container');
 let bebes = [];
+const cuneros = query(collection(db, "Cuneros"), where("Disponibilidad", "==", "Disponible"));
+const select = document.getElementById('Cuneros');
+let list = [];
+var parentElement = document.getElementById('enfermedades');
+let enfermedades = [];
 
 window.onload = function () {
   var carga = document.getElementById('contenedor_carga');
@@ -59,9 +64,33 @@ function babyCards(doc, cont) {
   `
 }
 
+//Añadir los cuneros disponibles a la lista 
+function addOptions(list) {
+  for (let value in list) {
+    var option = document.createElement("option");
+    option.text = (list[value]);
+    select.add(option);
+  }
+}
 
+function addCheckBox(value){
+  
+  var check = document.createElement("input");
+  check.id = "flexCheckDefault";
+  check.type="checkbox"; 
+  //check.className="form-check-input"
+  var name = document.createElement("label");
+  name.className="form-check-label"
+  name.for = "flexCheckDefault";
+  parentElement.appendChild(check);
+}
 
-
+function reiniciar(){
+  for (let i = select.options.length; i >= 0; i--) {
+    select.remove(i);
+  }
+  list=[];
+}
 
 //Obtener los datos de la base de datos
 
@@ -75,58 +104,27 @@ window.addEventListener('DOMContentLoaded', async e => {
       deleteDocument();
     });
 
+    enfermedades = await getDocs(collection(db, "Enfermedades"));
+    enfermedades.forEach((doc) => {
+      addCheckBox(doc.data().Nombre);
+      deleteDocument();
+    });
+
+    const querySnapshot = await getDocs(cuneros);
+    querySnapshot.forEach((doc) => {
+    list.push(doc.data().Cunero);
+    });
+    addOptions(list);
+
+
+
   } catch (error) {
     console.log(error)
   }
 
-
-
-
-
-
-  const cuneros = query(collection(db, "Cuneros"), where("Disponibilidad", "==", "Disponible"));
-
-  let list = [];
-  const querySnapshot = await getDocs(cuneros);
-  querySnapshot.forEach((doc) => {
-    list.push(doc.data().Cunero);
-  });
-
-  addOptions(list);
-
-
-  function addOptions(list) {
-
-    const select = document.getElementById('Cuneros');
-
-    for (let value in list) {
-      var option = document.createElement("option");
-      option.text = (list[value]);
-      select.add(option);
-    }
-  }
-
-
-
+  
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //Almacenar los datos en la base de datos
@@ -165,41 +163,29 @@ informationForm.addEventListener('submit', async e => {
       babyCards(doc, cont);
       cont++;
       deleteDocument();
-
-
-
-
-
     });
   } catch (e) {
     console.error("Error adding document: ", e);
   }
 
-
-
-
   //Actualizar cunero a no disponible
   const actualizar = doc(db, "Cuneros", str);
-
   await updateDoc(actualizar, {
     Disponibilidad: "No Disponible"
   });
+
+  //Obtener de nuevo la lista de los cuneros disponibles
+  reiniciar();
+  const querySnapshot = await getDocs(cuneros);
+  querySnapshot.forEach((doc) => {
+    list.push(doc.data().Cunero);
+  });
+  addOptions(list);
+
   ////////////////////////////////////
 
   limpiarFormulario();
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //Metodo para eliminar
@@ -213,11 +199,18 @@ function deleteDocument() {
       const docSnap = await getDoc(docRef);
       console.log(docSnap.data().Cunero);
       
+      
       const actualizar = doc(db, "Cuneros", docSnap.data().Cunero);
-
       await updateDoc(actualizar, {
         Disponibilidad: "Disponible"
       });
+
+      reiniciar(); 
+      const querySnapshot = await getDocs(cuneros);
+      querySnapshot.forEach((doc) => {
+      list.push(doc.data().Cunero);
+      });
+      addOptions(list);
       /////////////////////
 
       await deleteDoc(doc(db, 'Bebes', e.target.dataset.id));
