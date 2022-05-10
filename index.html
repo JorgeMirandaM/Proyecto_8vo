@@ -26,7 +26,18 @@
     <script>
       function showContent(){
         element = document.getElementById("enfermedades");
-        check = document.getElementById("flexSwitchCheckDefault");
+        check = document.getElementById("switch-enfermedades");
+        if (check.checked) {
+            element.style.display='block';
+        }
+        else {
+            element.style.display='none';
+        }
+      }
+
+      function showContent2(){
+        element = document.getElementById("nueva");
+        check = document.getElementById("otro");
         if (check.checked) {
             element.style.display='block';
         }
@@ -80,16 +91,11 @@
     <!--Bebes-->
     <div class="container">
       <div class="row ">
-        <div id="datos-container"></div>
-        
+        <div id="datos-container" class="col-sm-3"></div>
         
       </div>
     </div>
 
-    <!-- Botones -->
-    <button id="btn-send" style="visibility:hidden"></button>
-    <button id="btn-stop" style="visibility:hidden" ></button>
-    <button id="btn-new"  style="visibility:hidden"></button>
     <footer>
       <img src="./images/footer.png" alt="" style="bottom: 0cm; width: 100%;
       height: 130px; position: absolute;">
@@ -175,21 +181,20 @@
                       <input type="time" id="hnacimiento" class="form-control ml-lg-5" placeholder="Hora de nacimiento" />
                     </div>
                   </div>
-                  <div class="form-group" id="gestacion">
+                  <div class="form-group">
                     <input
                       type="number"
-                      id="semanas"
+                      id="gestacion"
                       class="form-control"
                       placeholder="Semanas de gestación"
                       autocomplete="off"
-                      min="20" 
+                      min="23" 
                       pattern="^[0-9]+"
-                
                     />
                   </div>
                   <div class="form-group">
-                    <label for="customRange3" class="form-label">Evaluación de Apgar:</label> <output>0</output>
-                    <input type="range" class="form-range" id="customRange3" min="0" max="10" step="1" oninput="this.previousElementSibling.value = this.value" value="0" >
+                    <label for="apgar" class="form-label">Evaluación de Apgar:</label> <output>0</output>
+                    <input type="range" class="form-range" id="apgar" min="0" max="10" step="1" oninput="this.previousElementSibling.value = this.value" value="0" >
                   </div>
                   <div class="form-group">
                     <p>Cunero asignado:</p>
@@ -199,29 +204,28 @@
                   </div>
                   <div class="form-group">
                     <div class="form-switch mt-3 ml-1 mb-3 mr-auto">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" onchange="javascript:showContent()">
-                      <label class="form-check-label" for="flexSwitchCheckDefault">¿El bebé presenta alguna condición médica?</label>
+                      <input class="form-check-input" type="checkbox" id="switch-enfermedades" onchange="javascript:showContent()">
+                      <label class="form-check-label" for="switch-enfermedades">¿El bebé presenta alguna condición médica?</label>
                     </div>
                     <div class="form-group" id="enfermedades" style="display: none;">
                       <p>Seleccione alguna opción:</p>
-                      <div class="form-check">
-                        <!-- <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                          Default checkbox
+                      <div id="enfermedades-check">
+
+                      </div>
+                      <div class="form-check" id="new">
+                        <input class="form-check-input" type="checkbox" id="otro" onchange="javascript:showContent2()">
+                        <label class="form-check-label" for="otro">
+                          Otra
                         </label>
                       </div>
-                      <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
-                        <label class="form-check-label" for="flexCheckChecked">
-                          Checked checkbox
-                        </label> -->
+                    </div>
+                    <div class="form-group">
+                      <div id="nueva" class="form-group" style="display: none;">
+                        <label for="nuevaenfermedad">Ingrese la condicion médica:</label>
+                        <input type="text" id="nuevaenfermedad" class="form-control" autocomplete="off">
                       </div>
                     </div>
-                    <!-- <div class="form-group form-check form-switch mt-3 ml-4 mr-auto" id="enfermedades" style="display: none;">
-                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                      <label class="form-check-label" for="flexCheckDefault"> Default checkbox </label>
-                    </div> -->
-                  <div>
+                    
                   <div class="modal-footer">
                     <button
                       type="submit"

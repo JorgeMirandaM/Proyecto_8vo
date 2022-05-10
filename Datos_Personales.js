@@ -8,8 +8,10 @@ let bebes = [];
 const cuneros = query(collection(db, "Cuneros"), where("Disponibilidad", "==", "Disponible"));
 const select = document.getElementById('Cuneros');
 let list = [];
-var parentElement = document.getElementById('enfermedades');
+const checkboxesElement = document.getElementById('enfermedades-check');
+var enfermedad = ""; 
 let enfermedades = [];
+let enfermedades_2 = [];
 
 window.onload = function () {
   var carga = document.getElementById('contenedor_carga');
@@ -18,20 +20,21 @@ window.onload = function () {
 }
 
 function babyCards(doc, cont) {
-  datosContainer.innerHTML += `
-    <div class="col">
+  datosContainer.innerHTML += 
+  `
+  <div>
     <div class="card mt-3">
-          <div class="card-body">
-            <div class="row">
-            <div class="col-10">
-            <h5 class="card-title">Cunero ${doc.data().Cunero}</h5>
+          <div class="card-body text-center">
+            <div class="Cunero">
+              <h5 class="card-title">Cunero ${doc.data().Cunero}</h5>
+            </div>
+            <div class="d">
+              <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal${cont}">
+              <i class="fas fa-info-circle"></i>
+              <button type="button" class="btn ml-3 btn-danger" data-id="${doc.id}"> <i class="fas fa-trash"></i></button>
+            </div>
           </div>
-          <div class="col-2">
-          <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal${cont}">
-          <i class="fas fa-info-circle"></i>
-          <button type="button" class="btn ml-3 btn-danger" data-id="${doc.id}"> <i class="fas fa-trash"></i></button>
         </div>
-      </div>
       </div>
     </div>
   </div>
@@ -47,12 +50,14 @@ function babyCards(doc, cont) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <legend class="text-dark " style="font-size: x-large"><b>Enfermedades:</b> ${doc.data().Enfermedades} </legend>
         <legend class="text-dark " style="font-size: medium"><b>Nombre(s) de Padre/Madre:</b> ${doc.data().NombrePadres} </legend>
         <legend class="text-dark " style="font-size: medium"><b>Apellidos:</b> ${doc.data().ApellidoP}  ${doc.data().ApellidoM}</legend>
         <legend class="text-dark " style="font-size: medium"><b>Fecha de nacimiento:</b> ${doc.data().Fecha} </legend>
         <legend class="text-dark " style="font-size: medium"><b>Hora de nacimiento:</b> ${doc.data().Hora} </legend>
         <legend class="text-dark " style="font-size: medium"><b>Genero:</b> ${doc.data().Genero} </legend>
         <legend class="text-dark " style="font-size: medium"><b>Peso:</b> ${doc.data().Peso} Kg</legend>
+        <legend class="text-dark " style="font-size: medium"><b>Edad gestacional:</b> ${doc.data().Gestacion} semanas</legend>
       </div>
       <div class="modal-footer">
           <a href="./Datos_Médicos.html" type="button" class="btn btn-secondary" aria-pressed="true">Datos</a>
@@ -73,16 +78,15 @@ function addOptions(list) {
   }
 }
 
-function addCheckBox(value){
-  
-  var check = document.createElement("input");
-  check.id = "flexCheckDefault";
-  check.type="checkbox"; 
-  //check.className="form-check-input"
-  var name = document.createElement("label");
-  name.className="form-check-label"
-  name.for = "flexCheckDefault";
-  parentElement.appendChild(check);
+function addCheckBox(doc){
+  checkboxesElement.innerHTML += `
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="${doc.data().Nombre}" id="${doc.data().Nombre}">
+    <label class="form-check-label" for="${doc.data().Nombre}">
+      ${doc.data().Nombre}
+    </label>
+  </div>
+  `
 }
 
 function reiniciar(){
@@ -106,7 +110,8 @@ window.addEventListener('DOMContentLoaded', async e => {
 
     enfermedades = await getDocs(collection(db, "Enfermedades"));
     enfermedades.forEach((doc) => {
-      addCheckBox(doc.data().Nombre);
+      enfermedades_2.push(doc.data().Nombre);
+      addCheckBox(doc);
       deleteDocument();
     });
 
@@ -116,13 +121,9 @@ window.addEventListener('DOMContentLoaded', async e => {
     });
     addOptions(list);
 
-
-
   } catch (error) {
     console.log(error)
   }
-
-  
 
 });
 
@@ -142,6 +143,42 @@ informationForm.addEventListener('submit', async e => {
   if (document.getElementById('sexo1').checked) {
     selected = document.getElementById('sexo1').value;
   }
+
+  //Clasificación de los bebés de acuerdo a semanas de gestación
+  var clasificacion = ""; 
+  if (gestacion.value >= 23 && gestacion.value <= 25){
+    clasificacion = "Gran Inmaduro";
+  } else if (gestacion.value > 25 && gestacion.value <= 28){
+    clasificacion = "Pretérmino extremo";
+  } else if (gestacion.value > 28 && gestacion.value <= 30){
+    clasificacion = "Pretérmio severo";
+  } else if (gestacion.value > 30 && gestacion.value <= 33){
+    clasificacion = "Pretérmino moderado";
+  } else if (gestacion.value > 33 && gestacion.value <= 36){
+    clasificacion = "Pretérmino tardío";
+  } else if (gestacion.value > 36 && gestacion.value <= 38){
+    clasificacion = "Término precoz";
+  } else if (gestacion.value > 38 && gestacion.value <= 41){
+    clasificacion = "Término maduro";
+  } else if (gestacion.value > 41){
+    clasificacion = "Postérmino";
+  }
+
+  // Saber si el bebé presenta alguna enfermedad
+  const check = document.getElementById("switch-enfermedades");
+  if (check.checked){
+    enfermedades_2.forEach(element => {
+      if(document.getElementById(element).checked){
+        enfermedad += element+", ";
+      }
+    });
+    if(otro.checked){ 
+      enfermedad += nuevaenfermedad.value; 
+    }
+  } else{
+    enfermedad = "Ninguna";
+  }
+
   try {
     const docRef = addDoc(collection(db, "Bebes"), {
       NombrePadres: names.value,
@@ -151,9 +188,12 @@ informationForm.addEventListener('submit', async e => {
       Peso: peso.value,
       Fecha: fnacimiento.value,
       Hora: time,
+      Gestacion:  gestacion.value,
+      Clasificacion: clasificacion,
+      Apgar: apgar.value,
+      Enfermedades: enfermedad,
       Cunero: str
     });
-
 
     bebes = [];
     datosContainer.innerHTML = "";
@@ -182,9 +222,8 @@ informationForm.addEventListener('submit', async e => {
   });
   addOptions(list);
 
-  ////////////////////////////////////
-
-  limpiarFormulario();
+  document.getElementById("information-form").reset();
+  enfermedad = "";
 });
 
 
@@ -197,7 +236,6 @@ function deleteDocument() {
       //Actualizar cunero a disponible
       const docRef = doc(db, "Bebes", e.target.dataset.id);
       const docSnap = await getDoc(docRef);
-      console.log(docSnap.data().Cunero);
       
       
       const actualizar = doc(db, "Cuneros", docSnap.data().Cunero);
@@ -214,7 +252,6 @@ function deleteDocument() {
       /////////////////////
 
       await deleteDoc(doc(db, 'Bebes', e.target.dataset.id));
-      console.log(e.target.dataset.id);
       bebes = [];
       datosContainer.innerHTML = "";
 
@@ -226,16 +263,8 @@ function deleteDocument() {
         cont++;
         deleteDocument();
       });
-
-
-
     })
   })
-}
-
-//Resetear formulario
-function limpiarFormulario() {
-  document.getElementById("information-form").reset();
 }
 
 
