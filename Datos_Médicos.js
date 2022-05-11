@@ -1,7 +1,7 @@
-//import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
+  //import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-firestore.js";
 //import { logEvent } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-analytics.js";
 
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js";
+import { collection, addDoc }  from "https://www.gstatic.com/firebasejs/9.7.0/firebase-firestore.js";
 import { logEvent } from  "https://www.gstatic.com/firebasejs/9.7.0/firebase-analytics.js";
 
 import { db } from './firebase.js';
@@ -19,11 +19,11 @@ logEvent(analytics, 'Temperatura', { name: 'Temp' });
 let activo = true;
 
 if (activo) {
-  let pul = Math.floor((Math.random() * (75 - 65 + 1)) + 65);
-    console.log(pul);
-    Pulse.value=pul;
+
 
   (() => {
+   
+
     let info = document.getElementById('btn-send');
 
     info.addEventListener('click', () => {
@@ -32,10 +32,18 @@ if (activo) {
         console.log(data);
         if (activo) {
 
+          // let pul = Math.floor((Math.random() * (75 - 65 + 1)) + 65);
+          // console.log(pul);
+          // Pulse.value=pul;
+    
+
+          long.value="-103.3877487182";
+          lat.value= "20.7544956207";
+
           if (data < 50) {
             temperature.innerHTML = `${data}°C`;
             temperature.value = data;
-            if(data>38 || data<37){
+            if(data>40 || data<35){
               swal({
                 title: "Alerta",
                 text: "Temperatura fuera de rango",
@@ -43,6 +51,7 @@ if (activo) {
                 buttons: true,
                 dangerMode: true,
               })
+              activo= false;
             }
             if(data==0){
               swal({
@@ -54,11 +63,12 @@ if (activo) {
               })
             }
 
+
           }
-          if (data > 50) {
-            Pulse.innerHTML = `${data}`;
-            Pulse.value = data;
-            if (data > 190) {
+          if (data > 500) {
+            Pulse.innerHTML = `${data-500}`;
+            Pulse.value = data-500;
+            if (data-500 > 110 && data-500 <500) {
 
               swal({
                 title: "Alerta",
@@ -67,6 +77,7 @@ if (activo) {
                 buttons: true,
                 dangerMode: true,
               })
+              activo= false;
           }
           
 
@@ -74,17 +85,19 @@ if (activo) {
         }
 
         if (Pulse.value != "" && temperature.value != "" && activo == true || Pulse.value != 0 && temperature.value != 0 && activo == true) {
+          setTimeout(function(){
           try {
             const docRef = addDoc(collection(db, "Datos"), {
               temperatura: temperature.value,
-              //pulse: Pulse.value,
-              longitud: "",
-              latitud: ""
+              pulse: Pulse.value,
+              longitud: "-103.3877487182",
+              latitud:  "20.7544956207"
             });
             console.log("Document written with ID: ", docRef.id);
           } catch (e) {
             console.error("Error adding document: ", e);
           }
+        },3000)
         }
 
       });
