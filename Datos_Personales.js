@@ -12,6 +12,7 @@ const checkboxesElement = document.getElementById('enfermedades-check');
 var enfermedad = ""; 
 let enfermedades = [];
 let enfermedades_2 = [];
+let babyscounter = 0; 
 
 window.onload = function () {
   var carga = document.getElementById('contenedor_carga');
@@ -22,7 +23,7 @@ window.onload = function () {
 function babyCards(doc, cont) {
   datosContainer.innerHTML += 
   `
-  <div>
+  <div class="col-sm-3">
     <div class="card mt-3">
           <div class="card-body text-center">
             <div class="Cunero">
@@ -97,7 +98,6 @@ function reiniciar(){
 }
 
 //Obtener los datos de la base de datos
-
 window.addEventListener('DOMContentLoaded', async e => {
   try {
     bebes = await getDocs(collection(db, "Bebes"));
@@ -105,14 +105,12 @@ window.addEventListener('DOMContentLoaded', async e => {
     bebes.forEach((doc) => {
       babyCards(doc, cont);
       cont++;
-      deleteDocument();
+      babyscounter++;
     });
-
     enfermedades = await getDocs(collection(db, "Enfermedades"));
     enfermedades.forEach((doc) => {
       enfermedades_2.push(doc.data().Nombre);
       addCheckBox(doc);
-      deleteDocument();
     });
 
     const querySnapshot = await getDocs(cuneros);
@@ -120,6 +118,7 @@ window.addEventListener('DOMContentLoaded', async e => {
     list.push(doc.data().Cunero);
     });
     addOptions(list);
+    deleteDocument();
 
   } catch (error) {
     console.log(error)
@@ -202,8 +201,8 @@ informationForm.addEventListener('submit', async e => {
     bebes.forEach((doc) => {
       babyCards(doc, cont);
       cont++;
-      deleteDocument();
     });
+    babyscounter++;
   } catch (e) {
     console.error("Error adding document: ", e);
   }
@@ -230,6 +229,7 @@ informationForm.addEventListener('submit', async e => {
 //Metodo para eliminar
 function deleteDocument() {
   const btns = document.querySelectorAll('.btn-danger');
+  
   btns.forEach(btn => {
     btn.addEventListener('click', async (e) => {
 
@@ -251,13 +251,29 @@ function deleteDocument() {
       addOptions(list);
       /////////////////////
 
+      const docRef1 = addDoc(collection(db, "Registros"), {
+        NombrePadres: docSnap.data().NombrePadres,
+        ApellidoP: docSnap.data().ApellidoP,
+        ApellidoM: docSnap.data().ApellidoM,
+        Genero: docSnap.data().Genero,
+        Peso: docSnap.data().Peso,
+        Fecha: docSnap.data().Fecha,
+        Hora: docSnap.data().Hora,
+        Gestacion:  docSnap.data().Gestacion,
+        Clasificacion: docSnap.data().Clasificacion,
+        Apgar: docSnap.data().Apgar,
+        Enfermedades: docSnap.data().Enfermedades,
+        Cunero: docSnap.data().Cunero
+      });
+
       await deleteDoc(doc(db, 'Bebes', e.target.dataset.id));
+
       bebes = [];
       datosContainer.innerHTML = "";
 
-
       bebes = await getDocs(collection(db, "Bebes"));
       let cont = 0;
+
       bebes.forEach((doc) => {
         babyCards(doc, cont);
         cont++;
@@ -267,6 +283,7 @@ function deleteDocument() {
   })
 }
 
+export const registros = babyscounter;
 
 
 

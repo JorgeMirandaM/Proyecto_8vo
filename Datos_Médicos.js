@@ -56,7 +56,7 @@ if (activo) {
             if(data==0){
               swal({
                 title: "Alerta",
-                text: "Bebe muerto",
+                text: "Bebe en peligro",
                 icon: "warning",
                 buttons: true,
                 dangerMode: true,
